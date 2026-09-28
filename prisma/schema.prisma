@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  projects     Project[]
+}
+
+model Project {
+  id          String @id @default(cuid())
+  title       String
+  description String @default("")
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Estúdio de Enquadramento (Frame)
+  hero     String @default("")
+  treasure String @default("")
+  dragon   String @default("")
+  quest    String @default("")
+
+  // Checklist das 4 regras (rótulos originais em PT)
+  ruleClarity   Boolean @default(false) // Clareza do desafio
+  ruleOwnership Boolean @default(false) // Protagonismo definido
+  ruleValue     Boolean @default(false) // Valor desejado explícito
+  ruleObstacle  Boolean @default(false) // Obstáculo concreto
+
+  // Ciclo FrED: frame | explore | decide | done
+  stage String @default("frame")
+
+  isTutorial Boolean @default(false)
+
+  whyNodes     WhyNode[]
+  howNodes     HowNode[]
+  criteria     Criterion[]
+  alternatives Alternative[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model WhyNode {
+  id        String    @id @default(cuid())
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  parentId  String?
+  parent    WhyNode?  @relation("WhyTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children  WhyNode[] @relation("WhyTree")
+  content   String    @default("")
+  sortOrder Int       @default(0)
+
+  @@index([projectId])
+  @@index([parentId])
+}
+
+model HowNode {
+  id        String    @id @default(cuid())
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  parentId  String?
+  parent    HowNode?  @relation("HowTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children  HowNode[] @relation("HowTree")
+  content   String    @default("")
+  sortOrder Int       @default(0)
+
+  @@index([projectId])
+  @@index([parentId])
+}
+
+model Criterion {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  weight    Float    @default(1)
+  sortOrder Int      @default(0)
+  scores    Score[]
+
+  @@index([projectId])
+}
+
+model Alternative {
+  id        String  @id @default(cuid())
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  sortOrder Int     @default(0)
+  scores    Score[]
+
+  @@index([projectId])
+}
+
+model Score {
+  id            String      @id @default(cuid())
+  criterionId   String
+  alternativeId String
+  value         Float       @default(0)
+  criterion     Criterion   @relation(fields: [criterionId], references: [id], onDelete: Cascade)
+  alternative   Alternative @relation(fields: [alternativeId], references: [id], onDelete: Cascade)
+
+  @@unique([criterionId, alternativeId])
+}
