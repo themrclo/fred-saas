@@ -97,22 +97,34 @@ Abra [http://localhost:3000](http://localhost:3000).
 de apresentação (pôster, maquete ou vídeo+estande) sob prazo de 10 dias e R$ 200.
 O projeto é marcado com `isTutorial: true` e pode ser aberto em `/tutorial`.
 
+## URLs
+
+| Ambiente | URL |
+|----------|-----|
+| **Produção (Vercel)** | https://fred-saas.vercel.app |
+| **Código (GitHub)** | https://github.com/themrclo/fred-saas |
+| Local | http://localhost:3000 |
+
 ## Deploy (Vercel)
 
-1. Repositório no GitHub conectado ao Vercel
-2. Variáveis de ambiente:
-   - `AUTH_SECRET` (ex.: `openssl rand -base64 32`)
-   - `AUTH_TRUST_HOST=true`
-   - `DATABASE_URL` — em serverless, prefira **Postgres (Neon)**; SQLite local não persiste no filesystem efêmero da Vercel
-3. Build Command: `prisma generate && next build`
-4. Após o primeiro deploy com Postgres: rode seed via `npx prisma db seed` com a URL de produção, ou use as contas criadas por signup
+Projeto Vercel: `fred-saas` (já publicado).
 
-### Nota sobre SQLite vs Postgres
+Variáveis configuradas:
 
-- **Local / revisão rápida:** SQLite (`file:./dev.db`) — zero setup.
-- **Vercel produção:** troque o `provider` no `schema.prisma` para `postgresql` e use uma URL Neon/Vercel Postgres, **ou** mantenha SQLite apenas para demo local e documente isso ao professor.
+- `AUTH_SECRET` / `NEXTAUTH_SECRET`
+- `AUTH_TRUST_HOST=true`
+- `DATABASE_URL=file:/tmp/fred.db`
 
-Este repositório inicia em SQLite para velocidade de desenvolvimento e inspeção.
+### Nota sobre SQLite em serverless (demo acadêmica)
+
+Em Vercel, `src/lib/prisma.ts` copia `prisma/seed.db` (pré-seedado, commitado) para `/tmp/fred.db` na primeira execução da instância. Isso permite demo/login imediato sem Neon.
+
+**Limitações (documentar ao professor):**
+
+- Dados gravados em runtime vivem só enquanto a instância serverless estiver quente; não há persistência multi-instância.
+- Para produção “de verdade” (turma grande), migre para **Postgres (Neon)** trocando o `provider` no `schema.prisma` e a `DATABASE_URL`.
+
+Local continua com `file:./dev.db` + `npm run db:push` / `db:seed`.
 
 ## O que está pronto (MVP)
 
