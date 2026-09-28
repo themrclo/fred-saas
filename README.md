@@ -1,6 +1,6 @@
-# FrED — SaaS educacional (Unimontes)
+# FrEDzinho — SaaS educacional (Unimontes)
 
-Ferramenta web para estruturar **problemas complexos** com o ciclo **FrED**:
+Ferramenta web para estruturar **problemas complexos** com o ciclo **FrEDzinho** (FrED):
 **Enquadrar → Explorar → Decidir**.
 
 > Conteúdo e interface **100% originais em português brasileiro**.
@@ -24,7 +24,7 @@ todos os rótulos, textos de ajuda e o caso tutorial são originais.
 |--------|------------|
 | Framework | Next.js 15 (App Router) + TypeScript |
 | UI | Tailwind CSS 4 + componentes leves |
-| Banco | Prisma 5 + **SQLite** (dev) / Postgres compatível via `DATABASE_URL` |
+| Banco | Prisma 5 + **PostgreSQL (Neon)** |
 | Auth | Auth.js (next-auth v5) — e-mail/senha (Credentials) |
 | Deploy | Vercel + GitHub |
 
@@ -43,7 +43,7 @@ src/
     auth.ts                 # Auth.js
     prisma.ts               # cliente Prisma
     export-markdown.ts      # gerador do cartão .md
-    utils.ts                # progresso do ciclo FrED
+    utils.ts                # progresso do ciclo FrEDzinho
 prisma/
   schema.prisma
   seed.ts                   # usuários demo + caso tutorial
@@ -56,7 +56,7 @@ prisma/
 - `WhyNode` / `HowNode` — árvores (parentId)
 - `Criterion` + `Alternative` + `Score` — matriz de decisão
 
-### Fluxo FrED na UI
+### Fluxo FrEDzinho na UI
 
 Painel lateral calcula progresso:
 
@@ -109,22 +109,22 @@ O projeto é marcado com `isTutorial: true` e pode ser aberto em `/tutorial`.
 
 Projeto Vercel: `fred-saas` (já publicado).
 
-Variáveis configuradas:
+Variáveis de ambiente (Vercel + local):
 
+- `DATABASE_URL` — Neon Postgres (obrigatória)
 - `AUTH_SECRET` / `NEXTAUTH_SECRET`
 - `AUTH_TRUST_HOST=true`
-- `DATABASE_URL=file:/tmp/fred.db`
+- `NEXTAUTH_URL` — URL pública em produção (ex.: `https://fred-saas.vercel.app`)
 
-### Nota sobre SQLite em serverless (demo acadêmica)
+### Banco PostgreSQL (Neon)
 
-Em Vercel, `src/lib/prisma.ts` copia `prisma/seed.db` (pré-seedado, commitado) para `/tmp/fred.db` na primeira execução da instância. Isso permite demo/login imediato sem Neon.
+O app usa **Neon Postgres** (`provider = "postgresql"` no Prisma).
 
-**Limitações (documentar ao professor):**
+- Variável obrigatória: `DATABASE_URL` (connection string com SSL)
+- Local: copie `.env.example` → `.env`, rode `npm run db:push` e `npm run db:seed`
+- Se o banco foi criado via Claimable Neon (`neon.new`), **reivindique** em até ~72h com a `claim_url` para não expirar
 
-- Dados gravados em runtime vivem só enquanto a instância serverless estiver quente; não há persistência multi-instância.
-- Para produção “de verdade” (turma grande), migre para **Postgres (Neon)** trocando o `provider` no `schema.prisma` e a `DATABASE_URL`.
-
-Local continua com `file:./dev.db` + `npm run db:push` / `db:seed`.
+Brand: interface e documentação usam o nome **FrEDzinho** (método FrED).
 
 ## O que está pronto (MVP)
 
@@ -133,7 +133,7 @@ Local continua com `file:./dev.db` + `npm run db:push` / `db:seed`.
 - [x] Estúdio de Enquadramento + 4 regras
 - [x] Mapa do Porquê e Mapa do Como (lista aninhada)
 - [x] Critérios com pesos + matriz + ranking
-- [x] Painel de status do ciclo FrED
+- [x] Painel de status do ciclo FrEDzinho
 - [x] Export Markdown
 - [x] Tutorial guiado original
 - [x] README em PT

@@ -55,7 +55,7 @@ export function projectToMarkdown(p: ExportInput): string {
   ranking.sort((a, b) => b.weighted - a.weighted);
 
   const lines = [
-    `# Cartão FrED — ${p.title}`,
+    `# Cartão FrEDzinho — ${p.title}`,
     "",
     p.description ? `> ${p.description}\n` : "",
     `**Estágio do ciclo:** ${p.stage}`,
@@ -99,7 +99,7 @@ export function projectToMarkdown(p: ExportInput): string {
     ),
     "",
     "---",
-    `_Gerado pelo FrED · Unimontes · ${new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}_`,
+    `_Gerado pelo FrEDzinho · Unimontes · ${new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}_`,
     "",
   ];
 

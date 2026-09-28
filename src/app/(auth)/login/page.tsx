@@ -38,7 +38,7 @@ function LoginForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle>Entrar no FrED</CardTitle>
+        <CardTitle>Entrar no FrEDzinho</CardTitle>
         <CardDescription>Use a conta demo ou a que você criou.</CardDescription>
       </CardHeader>
       <CardContent>

@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -35,7 +35,7 @@ model Project {
   ruleValue     Boolean @default(false) // Valor desejado explícito
   ruleObstacle  Boolean @default(false) // Obstáculo concreto
 
-  // Ciclo FrED: frame | explore | decide | done
+  // Ciclo FrEDzinho (FrED): frame | explore | decide | done
   stage String @default("frame")
 
   isTutorial Boolean @default(false)

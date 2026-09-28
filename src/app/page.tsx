@@ -14,10 +14,10 @@ export default async function HomePage() {
           Disciplina de graduação · Unimontes
         </p>
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">
-          FrED — Enquadrar, Explorar, Decidir
+          FrEDzinho — Enquadrar, Explorar, Decidir
         </h1>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-          SaaS educacional para estruturar problemas complexos com o ciclo FrED.
+          SaaS educacional para estruturar problemas complexos com o ciclo FrEDzinho.
           Conteúdo e interface 100% originais em português brasileiro — sem texto
           de livros comerciais.
         </p>

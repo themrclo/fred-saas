@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FrED — Resolução de problemas complexos",
+  title: "FrEDzinho — Resolução de problemas complexos",
   description:
-    "Ferramenta educacional FrED (Enquadrar–Explorar–Decidir) para a Unimontes. Conteúdo 100% original em português.",
+    "Ferramenta educacional FrEDzinho (Enquadrar–Explorar–Decidir) para a Unimontes. Conteúdo 100% original em português.",
 };
 
 export default function RootLayout({

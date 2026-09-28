@@ -36,7 +36,7 @@ export default function NewProjectPage() {
     <div className="mx-auto max-w-xl px-4 py-10">
       <Card>
         <CardHeader>
-          <CardTitle>Novo projeto FrED</CardTitle>
+          <CardTitle>Novo projeto FrEDzinhozinho</CardTitle>
           <CardDescription>
             Dê um nome ao problema complexo que você quer estruturar.
           </CardDescription>

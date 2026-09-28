@@ -9,7 +9,7 @@ export async function AppNav() {
       <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between gap-4">
         <Link href={session ? "/dashboard" : "/"} className="flex items-center gap-2 font-semibold text-slate-900">
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white text-sm">Fr</span>
-          <span>FrED</span>
+          <span>FrEDzinho</span>
           <span className="hidden sm:inline text-xs font-normal text-slate-400 ml-1">Unimontes</span>
         </Link>
         <nav className="flex items-center gap-2 text-sm">

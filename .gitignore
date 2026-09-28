@@ -39,7 +39,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local sqlite (keep seed.db committed for Vercel demo)
 prisma/dev.db
 prisma/dev.db-journal
 *.db-journal
+*.db
+prisma/dev.db*

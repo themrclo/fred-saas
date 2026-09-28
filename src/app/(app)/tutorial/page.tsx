@@ -74,7 +74,7 @@ export default async function TutorialPage() {
             </li>
           </ol>
           <Link href={`/projects/${tutorial.id}`}>
-            <Button>Abrir caso no FrED</Button>
+            <Button>Abrir caso no FrEDzinho</Button>
           </Link>
         </CardContent>
       </Card>

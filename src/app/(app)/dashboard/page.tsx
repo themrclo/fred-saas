@@ -22,7 +22,7 @@ export default async function DashboardPage() {
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Meus projetos</h1>
           <p className="text-sm text-slate-500 mt-1">
-            Olá, {session.user.name || "estudante"}. Continue um ciclo FrED ou comece um novo.
+            Olá, {session.user.name || "estudante"}. Continue um ciclo FrEDzinho ou comece um novo.
           </p>
         </div>
         <div className="flex gap-2">
